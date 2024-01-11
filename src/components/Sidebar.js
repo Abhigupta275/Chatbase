@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Sidebar = ({ children, lable }) => {
-  console.log("children... ", lable);
-  const [selectedTab, setSelectedTab] = useState("files");
+  const initialTab =
+  window.location.pathname === '/text'
+    ? 'text'
+    : window.location.pathname === '/website'
+    ? 'website'
+    : window.location.pathname === '/qa'
+    ? 'qa'
+    : window.location.pathname === '/notion'
+    ? 'notion'
+    : 'files';
+
+    const [selectedTab, setSelectedTab] = useState(initialTab); 
+
 
   return (
     <>
+        <Navbar />
       <section>
         <div>
           <h1 class="mb-2 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl text-center dark:text-white">
@@ -30,7 +43,7 @@ const Sidebar = ({ children, lable }) => {
                           onClick={() => setSelectedTab("files")}
                           className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
                             selectedTab === "files" &&
-                            "text-violet-600 bg-zinc-500 hover:bg-zinc-500"
+                            "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
                           }`}
                         >
                           <svg
@@ -58,7 +71,7 @@ const Sidebar = ({ children, lable }) => {
                           onClick={() => setSelectedTab("text")}
                           className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
                             selectedTab === "text" &&
-                            "text-violet-600 bg-zinc-500 hover:bg-zinc-500"
+                            "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
                           }`}
                         >
                           <svg
@@ -86,7 +99,7 @@ const Sidebar = ({ children, lable }) => {
                           onClick={() => setSelectedTab("website")}
                           className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
                             selectedTab === "website" &&
-                            "text-violet-600 bg-zinc-500 hover:bg-zinc-500"
+                            "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
                           }`}
                         >
                           <svg
@@ -114,7 +127,7 @@ const Sidebar = ({ children, lable }) => {
                           onClick={() => setSelectedTab("qa")}
                           className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
                             selectedTab === "qa" &&
-                            "text-violet-600 bg-zinc-500 hover:bg-zinc-500"
+                            "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
                           }`}
                         >
                           <svg
@@ -142,7 +155,7 @@ const Sidebar = ({ children, lable }) => {
                           onClick={() => setSelectedTab("notion")}
                           className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
                             selectedTab === "notion" &&
-                            "text-violet-600 bg-zinc-500 hover:bg-zinc-500"
+                            "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
                           }`}
                         >
                           <svg
