@@ -30,63 +30,63 @@ export default function Website() {
   return (
     <div>
       <Sidebar lable={"Website"}>
-        <div class="p-5">
+        <div className="p-5">
           <div>
-            <label class="my-2 block text-sm font-medium leading-6 text-zinc-900">
+            <label className="my-2 block text-sm font-medium leading-6 text-zinc-900">
               Crawl
             </label>
-            <div class="relative mt-2 rounded-md">
-              <div class="flex flex-col gap-2 lg:flex-row ">
+            <div className="relative mt-2 rounded-md">
+              <div className="flex flex-col gap-2 lg:flex-row ">
                 <input
                   type="text"
-                  class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50"
                   name="website"
                   placeholder="https://www.example.com"
                   value=""
                 />
-                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-9 px-4 py-2">
+                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-9 px-4 py-2">
                   Fetch links
                 </button>
               </div>
-              <div class="py-4 text-sm text-zinc-600">
+              <div className="py-4 text-sm text-zinc-600">
                 This will crawl all the links starting with the URL (not
                 including files on the website).
               </div>
             </div>
-            <div class="my-4 flex items-center">
-              <hr class="w-full border-t border-zinc-300" />
-              <span class="whitespace-nowrap px-2 text-zinc-600">OR</span>
-              <hr class="w-full border-t border-zinc-300" />
+            <div className="my-4 flex items-center">
+              <hr className="w-full border-t border-zinc-300" />
+              <span className="whitespace-nowrap px-2 text-zinc-600">OR</span>
+              <hr className="w-full border-t border-zinc-300" />
             </div>
             <div>
               <label
                 for="sitemap"
-                class="my-2 block text-sm font-medium leading-6 text-zinc-900"
+                className="my-2 block text-sm font-medium leading-6 text-zinc-900"
               >
                 Submit Sitemap
               </label>
-              <div class="relative mt-2 rounded-md ">
-                <div class="flex flex-col gap-2 lg:flex-row">
+              <div className="relative mt-2 rounded-md ">
+                <div className="flex flex-col gap-2 lg:flex-row">
                   <input
                     type="text"
-                    class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50"
                     name="sitemap"
                     placeholder="https://www.example.com/sitemap.xml"
                     value=""
                   />
-                  <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-9 px-4 py-2">
+                  <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-9 px-4 py-2">
                     Load sitemap
                   </button>
                 </div>
               </div>
             </div>
-            <div class="mt-16">
-              <div class="my-4 flex items-center">
-                <hr class="w-full border-t border-zinc-300" />
-                <span class="whitespace-nowrap px-2 text-zinc-600">
+            <div className="mt-16">
+              <div className="my-4 flex items-center">
+                <hr className="w-full border-t border-zinc-300" />
+                <span className="whitespace-nowrap px-2 text-zinc-600">
                   Included Links
                 </span>
-                <hr class="w-full border-t border-zinc-300" />
+                <hr className="w-full border-t border-zinc-300" />
               </div>
               <div
                 className="relative overflow-hidden mt-5 h-[36rem]"
@@ -162,7 +162,7 @@ export default function Website() {
                   </div>
                 </div>
               </div>
-              <div class="my-2 flex justify-end">
+              <div className="my-2 flex justify-end">
                 <button
                   className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-100 text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 h-9 px-4 py-2 hover:bg-zinc-200"
                   type="button"

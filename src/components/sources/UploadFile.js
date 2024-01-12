@@ -31,7 +31,7 @@ const UploadFile = () => {
     <div className="main-container">
       <Dropzone
         onDrop={handleUpload}
-        accept="image/*"
+        accept={['image/*']}
         minSize={1024}
         maxSize={3072000}
       >

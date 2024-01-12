@@ -7,12 +7,11 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Home from "./pages/Home";
-import Sidebar from "./components/Sidebar";import Dropzone from "./components/UploadFile";
-import Files from "./components/Files";
-import Text from "./components/Text";
-import Website from "./components/Website";
-import Qa from "./components/Qa";
-import Notion from "./components/Notion";
+import Text from './components/sources/Text'
+import Dropzone from "react-dropzone";
+import Website from './components/sources/Website'
+import Qa from "./components/sources/Qa"
+import Notion from "./components/sources/Notion"
 import Dashboard from "./pages/Dashboard";
 import Leads from "./components/dashboard/Leads";
 import ChatLogs from "./components/dashboard/ChatLogs";
@@ -21,6 +20,8 @@ import General from "./components/settings/General";
 import Model from "./components/settings/Model";
 import ChatInterface from "./components/settings/ChatInterface";
 import SLeads from "./components/settings/Leads";
+import Sidebar from "./components/sources/Sidebar";
+import Files from "./components/sources/Files";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/sidebar",
+    path: "/sources/sidebar",
     element: <Sidebar />,
   },
   {
@@ -36,23 +37,23 @@ const router = createBrowserRouter([
     element: <Dropzone />,
   },
   {
-    path: "/files",
+    path: "/sources/files",
     element: <Files />,
   },
   {
-    path: "/text",
+    path: "/sources/text",
     element: <Text />,
   },
   {
-    path: "/website",
+    path: "/sources/website",
     element: <Website />,
   },
   {
-    path: "/qa",
+    path: "/sources/qa",
     element: <Qa />,
   },
   {
-    path: "/notion",
+    path: "/sources/notion",
     element: <Notion />,
   },
   {

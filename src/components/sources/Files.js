@@ -1,6 +1,6 @@
+import Sidebar from "./Sidebar";
 import UploadFile from "./UploadFile";
 import React from "react";
-import Sidebar from "./Sidebar";
 
 function Files() {
   return (

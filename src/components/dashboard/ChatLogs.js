@@ -21,32 +21,23 @@ function ChatLogs() {
                   <label className="text-md mb-2 block font-medium text-zinc-700">
                     Filters
                   </label>
-                  <div className="mb-2 flex flex-col border-b border-zinc-200 pb-5 sm:justify-between md:flex-row">
-                    <div className=" mt-3 flex flex-col items-center md:mt-0 md:w-9/12 lg:w-10/12 lg:flex-row">
+                  <div className="mb-2 flex flex-col border-b border-zinc-200 pb-5 sm:justify-between md:flex-row ">
+                    <div className=" mt-3 flex flex-col items-center md:mt-0 md:w-9/12 lg:w-10/12 lg:flex-row gap-10">
                       <div className="w-full ">
                         <div className="relative w-full text-gray-700">
-                        <ReactDatePicker />
-                         
+                          <ReactDatePicker />
                         </div>
                       </div>
                       <div className="my-3 flex w-full items-center lg:my-0">
                         <div className="w-3/4 lg:w-52">
                           <div className="relative">
-                          <Dropdown />
-                            
+                            <Dropdown />
                           </div>
-                          
                         </div>
                         <div className="w-1/2">
                           <div className="w-full rounded-md shadow-sm">
                             <div className="w-full bg-white">
                               <section aria-labelledby="filter-heading">
-                                {/* <h2 id="filter-heading" className="sr-only">
-                                Filters
-                              </h2> */}
-                                {/* <div className=""> */}
-                                {/* <div className=""> */}
-                                {/* <div className="flow-root"> */}
                                 <div className="-mx-4 flex items-center divide-x divide-zinc-200">
                                   <div
                                     className="relative inline-block w-full px-4 text-left"
@@ -55,11 +46,6 @@ function ChatLogs() {
                                     <Sourcedrop />
                                   </div>
                                 </div>
-                                {/* <div style={{position: 'fixed', top:'1px', left: '1px', width: '1px', height: '0px', padding: '0px', margin: '-1px', overflow: 'hidden', clip:'rect(0px, 0px, 0px, 0px)', whiteSpace: 'nowrap',borderWidth: '0px', display: 'none'}}>
-                                    </div> */}
-                                {/* </div> */}
-                                {/* </div> */}
-                                {/* </div> */}
                               </section>
                             </div>
                           </div>
@@ -84,14 +70,14 @@ function ChatLogs() {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                             stroke="currentColor"
                             aria-hidden="true"
                             className="ml-2 h-5 w-5"
                           >
                             <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
                               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
                             ></path>
                           </svg>
