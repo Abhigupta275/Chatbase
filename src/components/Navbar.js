@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom/dist";
 
 function Navbar() {
+  const initialTab =
+    window.location.pathname === "/dashboard/chatlogs"
+      ? "dashboard"
+      : window.location.pathname === "/sources/files"
+      ? "sources"
+      : window.location.pathname === "/chatbot"
+      ? "chatbot"
+      : window.location.pathname === "/settings/general"
+      ? "settings"
+      : "dashboard";
+
+  const [selectedTab, setSelectedTab] = useState(initialTab);
+
   return (
     <>
       <header className="w-full flex-col rounded-t-3xl border-b lg:flex mb-10">
@@ -19,35 +32,51 @@ function Navbar() {
           </div>
         </section>
         <nav className="no-scrollbar flex flex-row items-center justify-start  gap-7 overflow-auto whitespace-nowrap p-1 font-medium lg:justify-center">
-          <a
-            className="text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"
-            href="/chatbot/3tFwgBu9onyfmWh63meID"
+          <Link
+          
+            to="/chatbot"
+            className={selectedTab === "chatbot" ? "text-zinc-800 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium" : "text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"}
           >
             Chatbot
-            <div className="group-hover/link:bg-zinc-200 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
-          </a>
+            {selectedTab === "chatbot" ? (
+              <div className="bg-violet-500 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            ) : (
+              ""
+            )}
+          </Link>
           <Link
-            className="text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"
+            className={selectedTab === "settings" ? "text-zinc-800 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium" : "text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"}
             to="/settings/general"
           >
             Settings
-            <div className="group-hover/link:bg-zinc-200 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            {selectedTab === "settings" ? (
+              <div className="bg-violet-500 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            ) : (
+              ""
+            )}
           </Link>
           <Link
-            className="text-zinc-800 relative col-span-1  items-center p-1  text-sm font-medium"
+            className={selectedTab === "dashboard" ? "text-zinc-800 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium" : "text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"}
             to="/dashboard/chatlogs"
           >
             Dashboard
-            <div className="bg-violet-500 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            {selectedTab === "dashboard" ? (
+              <div className="bg-violet-500 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            ) : (
+              ""
+            )}
           </Link>
-          <Link to='/sources/files'
-            className="text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"
-            href="/chatbot/3tFwgBu9onyfmWh63meID/update-chatbot-data"
+          <Link
+            to="/sources/files"
+            className={selectedTab === "sources" ? "text-zinc-800 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium" : "text-zinc-500 hover:text-zinc-700 relative col-span-1  items-center p-1  text-sm font-medium"}
           >
             Sources
-            <div className="group-hover/link:bg-zinc-200 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            {selectedTab === "sources" ? (
+              <div className="bg-violet-500 absolute -left-0 top-[1.95rem] h-[0.15rem] w-full rounded-3xl  transition-all   ease-in-out"></div>
+            ) : (
+              ""
+            )}
           </Link>
-          
         </nav>
       </header>
     </>

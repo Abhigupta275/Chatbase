@@ -20,7 +20,7 @@ function Sidebar({ children }) {
     <div>
       <Navbar />
       <section>
-        <div className="mx-auto flex max-w-7xl flex-row justify-between px-4">
+        <div className="mx-auto flex max-w-7xl flex-row justify-between px-4 mb-6">
           <h4 className=" text-3xl font-bold">Settings</h4>
         </div>
         <div className="max-w-7xl px-4 lg:mx-auto">

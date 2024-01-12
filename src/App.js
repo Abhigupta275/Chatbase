@@ -22,6 +22,7 @@ import ChatInterface from "./components/settings/ChatInterface";
 import SLeads from "./components/settings/Leads";
 import Sidebar from "./components/sources/Sidebar";
 import Files from "./components/sources/Files";
+import Chatbot from "./pages/Chatbot";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
   {
     path: "/settings/leads",
     element: <SLeads />,
+  },
+  {
+    path: "/chatbot",
+    element: <Chatbot />,
   },
 ]);
 

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from './Sidebar'
 
 function ChatInterface() {
+
+  const [initialMsg, setInitialMsg] = useState('Hi! What can I help you with?')
   return (
     <div>
       <Sidebar>
@@ -23,14 +25,19 @@ function ChatInterface() {
               <label className="block text-sm font-medium text-zinc-700">
                 Initial Messages
               </label>
-              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-200/90 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 h-9 px-4 py-2">
+              <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-200/90 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80 h-9 px-4 py-2"
+               onClick={()=>setInitialMsg('Hi! What can I help you with?')}
+              >
                 Reset
               </button>
             </div>
             <div className="mt-1">
               <textarea name="initial_messages" placeholder="Hi! What can I help you with?"
               className="w-full min-w-0  flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3   text-zinc-900 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm"
-              maxlength="1000">
+              maxlength="1000"
+              value={initialMsg}
+              onChange={(e)=>setInitialMsg(e.target.value)}
+              >
                 Hi! What can I help you with?
               </textarea>
               <p className="mt-2 text-sm text-zinc-500">
