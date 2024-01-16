@@ -5,13 +5,13 @@ function Navbar() {
   const initialTab =
     window.location.pathname === "/dashboard/chatlogs"
       ? "dashboard"
-      : window.location.pathname === "/sources/files"
+      : window.location.pathname === "/sources"
       ? "sources"
       : window.location.pathname === "/chatbot"
       ? "chatbot"
       : window.location.pathname === "/settings/general"
       ? "settings"
-      : "dashboard";
+      : "";
 
   const [selectedTab, setSelectedTab] = useState(initialTab);
 

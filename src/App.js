@@ -23,6 +23,10 @@ import SLeads from "./components/settings/Leads";
 import Sidebar from "./components/sources/Sidebar";
 import Files from "./components/sources/Files";
 import Chatbot from "./pages/Chatbot";
+import Sources from "./pages/Sources";
+import { BiLogIn } from "react-icons/bi";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +77,10 @@ const router = createBrowserRouter([
     path: "/settings",
     element: <Settings />,
   },
+  // {
+  //   path: "/sources",
+  //   element: <Sources />,
+  // },
   {
     path: "/settings/general",
     element: <General />,
@@ -98,6 +106,15 @@ const router = createBrowserRouter([
     path: "/chatbot",
     element: <Chatbot />,
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  
 ]);
 
 function App() {

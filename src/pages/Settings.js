@@ -4,7 +4,7 @@ import Sidebar from '../components/settings/Sidebar'
 function Settings() {
   return (
     <div>
-      <Sidebar/> 
+      <Sidebar />
     </div>
   )
 }

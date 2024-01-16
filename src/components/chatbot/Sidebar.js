@@ -1,7 +1,24 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Navbar from "../Navbar";
+import axios from "axios";
 
 function Sidebar() {
+
+  const [data, setData] = useState(null);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/chatbots/", {withCredentials:true});
+        console.log('new res...',response.data[0].status)
+        setData(response.data[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -25,7 +42,7 @@ function Sidebar() {
                     </label>
                     <div class="flex items-center space-x-4">
                       <div class="text-sm font-semibold text-zinc-700">
-                        XtmAh0NHl8LZEzu3GEhN9
+                      {data._id}
                       </div>
                       <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 h-9 p-0">
                         <svg
@@ -78,7 +95,7 @@ function Sidebar() {
                     </label>
                     <div class="text-sm font-semibold text-zinc-700">
                       <span class="mr-1 inline-block h-[10px] w-[10px] rounded-full bg-teal-400"></span>
-                      Trained
+                      {data.status}
                     </div>
                   </div>
                   <div class="col-span-6">
@@ -94,7 +111,8 @@ function Sidebar() {
                   <label class="block text-sm font-medium text-zinc-500">
                     Number of characters
                   </label>
-                  <div class="text-sm font-semibold text-zinc-700">1,071</div>
+                  <div class="text-sm font-semibold text-zinc-700">{data.number_of_characters
+}</div>
                 </div>
                 <div class="pb-4">
                   <label class="block text-sm font-medium text-zinc-500">
@@ -124,7 +142,7 @@ function Sidebar() {
                     Last trained at
                   </label>
                   <div class="text-sm font-semibold text-zinc-700">
-                    January 11, 2024 at 10:59 AM
+                    {data.last_trained_at}
                   </div>
                 </div>
               </div>

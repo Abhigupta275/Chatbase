@@ -1,25 +1,56 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Navbar from "../Navbar";
+import Cookies from "js-cookie";
 
 const Sidebar = ({ children, lable }) => {
   const initialTab =
-  window.location.pathname === '/sources/text'
-    ? 'text'
-    : window.location.pathname === '/sources/website'
-    ? 'website'
-    : window.location.pathname === '/sources/qa'
-    ? 'qa'
-    : window.location.pathname === '/sources/notion'
-    ? 'notion'
-    : 'files';
+    window.location.pathname === "/sources/text"
+      ? "text"
+      : window.location.pathname === "/sources/website"
+      ? "website"
+      : window.location.pathname === "/sources/qa"
+      ? "qa"
+      : window.location.pathname === "/sources/notion"
+      ? "notion"
+      : "files";
 
-    const [selectedTab, setSelectedTab] = useState(initialTab); 
+  const [selectedTab, setSelectedTab] = useState(initialTab);
 
+  const handleCreateChatbot = async () => {
+    try {
+      const requestData = {
+        chatbot_name: "xyz.docx",
+        settingId: "2",
+        generatedID: "abcd1234",
+        number_of_characters: "109",
+        last_trained_at: "Jandk",
+      };
+      console.log("requestData...", requestData);
+
+      const response = await axios.post(
+        "http://localhost:8000/chatbots/",
+        requestData,
+        { withCredentials: true }
+      );
+      console.log("data...", response);
+
+      if (!response.data) {
+        throw new Error("Failed to create chatbot");
+      }
+
+      // localStorage.setItem("chatbotResponse", JSON.stringify(response.data));
+
+      // You can also redirect to another page or perform other actions as needed
+    } catch (error) {
+      console.error("Error creating chatbot:", error);
+    }
+  };
 
   return (
     <>
-        <Navbar />
+      <Navbar />
       <section>
         <div>
           <h1 className="mb-2 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-4xl text-center dark:text-white">
@@ -189,7 +220,10 @@ const Sidebar = ({ children, lable }) => {
             <p className="text-gray-500 text-sm">1 File (70 chars)</p>
             <p className="text-sm my-2">Total detected characters</p>
             <p className="text-center">70 / 400,000 limit</p>
-            <button className="bg-black text-white text-center w-full h-10 my-2 rounded-lg">
+            <button
+              onClick={handleCreateChatbot}
+              className="bg-black text-white text-center w-full h-10 my-2 rounded-lg"
+            >
               Create Chatbot
             </button>
           </div>

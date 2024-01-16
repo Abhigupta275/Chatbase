@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Sidebar({ children }) {
   const initialTab =
-    window.location.pathname === "/settings/general"
+    window.location.pathname === "/general"
       ? "general"
       : window.location.pathname === "/settings/model"
       ? "model"
@@ -13,7 +13,6 @@ function Sidebar({ children }) {
       : window.location.pathname === "/settings/leads"
       ? "leads"
       : "general";
-
   const [selectedTab, setSelectedTab] = useState(initialTab);
 
   return (
@@ -67,7 +66,7 @@ function Sidebar({ children }) {
                     <ul role="list" className="flex flex-1 flex-col">
                       <li>
                         <ul role="list" className="space-y-1">
-                          <Link to="/settings/general">
+                          <Link to="/settings">
                             <li>
                               <button
                                 onClick={() => setSelectedTab("general")}
