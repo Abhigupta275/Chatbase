@@ -27,6 +27,8 @@ import Sources from "./pages/Sources";
 import { BiLogIn } from "react-icons/bi";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import ChatbotCreate from "./pages/ChatbotCreate";
+import Security from "./components/settings/Security";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/sources/sidebar",
+    path: "/chatbot/:id/sources/sidebar",
     element: <Sidebar />,
   },
   {
@@ -42,68 +44,63 @@ const router = createBrowserRouter([
     element: <Dropzone />,
   },
   {
-    path: "/sources/files",
+    path: "/chatbot/:id/sources/files",
     element: <Files />,
   },
   {
-    path: "/sources/text",
+    path: "/chatbot/:id/sources/text",
     element: <Text />,
   },
   {
-    path: "/sources/website",
+    path: "/chatbot/:id/sources/website",
     element: <Website />,
   },
   {
-    path: "/sources/qa",
+    path: "/chatbot/:id/sources/qa",
     element: <Qa />,
   },
   {
-    path: "/sources/notion",
+    path: "/chatbot/:id/sources/notion",
     element: <Notion />,
   },
+  // {
+  //   path: "/dashboard",
+  //   element: <Dashboard />,
+  // },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
-  {
-    path: "/dashboard/chatlogs",
+    path: "/chatbot/:id/dashboard/chatlogs",
     element: <ChatLogs />,
   },
   {
-    path: "/dashboard/leads",
+    path: "/chatbot/:id/dashboard/leads",
     element: <Leads />,
   },
   {
-    path: "/settings",
+    path: "/chatbot/:id/settings",
     element: <Settings />,
   },
-  // {
-  //   path: "/sources",
-  //   element: <Sources />,
-  // },
   {
-    path: "/settings/general",
+    path: "/chatbot/:id/settings/general",
     element: <General />,
   },
   {
-    path: "/settings/model",
+    path: "/chatbot/:id/settings/model",
     element: <Model />,
   },
   {
-    path: "/settings/general",
-    element: <General />,
-  },
-  
-  {
-    path: "/settings/chatinterface",
+    path: "/chatbot/:id/settings/chatinterface",
     element: <ChatInterface />,
   },
   {
-    path: "/settings/leads",
+    path: "/chatbot/:id/settings/leads",
     element: <SLeads />,
   },
   {
-    path: "/chatbot",
+    path: "/chatbot/:id/settings/security",
+    element: <Security /> ,
+  },
+  {
+    path: "/chatbot/:id",
     element: <Chatbot />,
   },
   {
@@ -114,8 +111,12 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUp />,
   },
-  
+  {
+    path: "/chatbotcreate",
+    element: <ChatbotCreate />,
+  },
 ]);
+
 
 function App() {
   return (

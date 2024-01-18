@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
+import axios from "axios";
 
 function SLeads() {
   const [name, setName] = useState("");
@@ -7,15 +8,23 @@ function SLeads() {
   const [phone, setPhone] = useState("");
   const [title, setTitle] = useState("");
 
-  const handleSave = (e) => {
-    e.preventDefault(); 
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Phone:", phone);
-    console.log("Title:", title);
+  const handleSave = async (e) => {
+    e.preventDefault();
 
-    // You can also use axios to make the API call here
-    // const response = axios.post("/url", { name, email, title, phone });
+    try {
+      const response = await axios.put(
+        "https://jellyfish-app-5tivv.ondigitalocean.app/settings/65a8c631eae71bb73a4a19c8/lead", 
+        {
+          name,
+          email,
+          phone,
+          title,
+        }
+      );
+      console.log("API response:", response.data);
+    } catch (error) {
+      console.error("API error:", error);
+    }
   };
 
   return (
@@ -37,7 +46,7 @@ function SLeads() {
                       <input
                         className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50 md:w-[32rem]"
                         name="title"
-                        maxlength="300"
+                        maxLength="300"
                         value={title}
                         placeholder="Enter some title here"
                         onChange={(e) => setTitle(e.target.value)}
@@ -55,18 +64,13 @@ function SLeads() {
                       <label className="text-md block pb-2 font-medium text-zinc-700">
                         Name
                       </label>
-                      {/* <button type="button" role="switch" aria-checked="true" data-state="checked"
-              value="on" className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-violet-500 data-[state=unchecked]:bg-zinc-200 dark:focus-visible:ring-zinc-300 dark:focus-visible:ring-offset-zinc-950 dark:data-[state=checked]:bg-zinc-50 dark:data-[state=unchecked]:bg-zinc-800">
-                <span data-state="checked" className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 dark:bg-zinc-950">
-                </span>
-              </button> */}
                     </div>
                     <div className="flex flex-row gap-5">
                       <input
                         className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50 md:w-[32rem]"
                         name="name_message"
                         placeholder="Enter name message"
-                        maxlength="300"
+                        maxLength="300"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
@@ -83,18 +87,13 @@ function SLeads() {
                       <label className="text-md block pb-2 font-medium text-zinc-700">
                         Email
                       </label>
-                      {/* <button type="button" role="switch" aria-checked="true" data-state="checked"
-              value="on" className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-violet-500 data-[state=unchecked]:bg-zinc-200 dark:focus-visible:ring-zinc-300 dark:focus-visible:ring-offset-zinc-950 dark:data-[state=checked]:bg-zinc-50 dark:data-[state=unchecked]:bg-zinc-800">
-                <span data-state="checked" className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 dark:bg-zinc-950">
-                </span>
-              </button> */}
                     </div>
                     <div className="flex flex-row gap-5">
                       <input
                         className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50 md:w-[32rem]"
                         name="email_message"
                         placeholder="Enter email message"
-                        maxlength="300"
+                        maxLength="300"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -111,18 +110,13 @@ function SLeads() {
                       <label className="text-md block pb-2 font-medium text-zinc-700">
                         Phone
                       </label>
-                      {/* <button type="button" role="switch" aria-checked="true" data-state="checked"
-              value="on" className="peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-violet-500 data-[state=unchecked]:bg-zinc-200 dark:focus-visible:ring-zinc-300 dark:focus-visible:ring-offset-zinc-950 dark:data-[state=checked]:bg-zinc-50 dark:data-[state=unchecked]:bg-zinc-800">
-                <span data-state="checked" className="pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 dark:bg-zinc-950">
-                </span>
-              </button> */}
                     </div>
                     <div className="flex flex-row gap-5">
                       <input
                         className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50 md:w-[32rem]"
                         name="phone_message"
                         placeholder="Enter phone message"
-                        maxlength="300"
+                        maxLength="300"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                       />

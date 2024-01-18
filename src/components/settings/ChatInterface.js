@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from './Sidebar'
 
 function ChatInterface() {
 
-  const [initialMsg, setInitialMsg] = useState('Hi! What can I help you with?')
+  const [storedData, setStoredData] = useState(null);
+  useEffect(()=>{
+    const dataString = localStorage.getItem("modalData");
+    if (dataString) {
+      const storedData = JSON.parse(dataString);
+      setStoredData(storedData);
+      // console.log("Stored Data from localStorage:", storedData);
+    }
+  },[])
+
+  const [initialMsg, setInitialMsg] = useState()
   return (
     <div>
       <Sidebar>
@@ -34,11 +44,11 @@ function ChatInterface() {
             <div className="mt-1">
               <textarea name="initial_messages" placeholder="Hi! What can I help you with?"
               className="w-full min-w-0  flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3   text-zinc-900 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm"
-              maxlength="1000"
+              maxLength="1000"
               value={initialMsg}
               onChange={(e)=>setInitialMsg(e.target.value)}
               >
-                Hi! What can I help you with?
+                {storedData && storedData.chatBotSettings.initial_messages}
               </textarea>
               <p className="mt-2 text-sm text-zinc-500">
                 Enter each message in a new line.
@@ -50,7 +60,7 @@ function ChatInterface() {
               Suggested Messages
             </label>
             <div className="mt-1">
-              <textarea name="suggested_messages" placeholder="What is example.com?"
+              <textarea name="suggested_messages" placeholder={storedData && storedData.chatBotSettings.suggested_messages}
               className="w-full min-w-0  flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3   text-zinc-900 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm">
               </textarea>
               <p className="mt-2 text-sm text-zinc-500">
@@ -64,7 +74,7 @@ function ChatInterface() {
             </label>
             <div className="mt-1">
               <input type="text" className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-md border px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 disabled:cursor-not-allowed disabled:opacity-50"
-              name="name" placeholder="Message..." maxlength="100" value="" />
+              name="name" placeholder={storedData && storedData.chatBotSettings.message_placeholder} maxLength="100" value="" />
             </div>
           </div>
           <div className="pb-8">
@@ -253,8 +263,8 @@ function ChatInterface() {
                   </div>
                   <div className="flex border-t px-4 py-3 group-[.cb-dark]:border-[#3f3f46] group-[.cb-light]:border-[#e4e4e7]">
                     <div className="flex w-full items-center leading-none">
-                      <textarea aria-label="chat input" required="" maxlength="4000" rows="1"
-                      tabindex="0" className="mr-3 max-h-36 w-full resize-none bg-transparent pr-3 leading-[24px] focus:outline-none focus:ring-0 focus-visible:ring-0 cursor-not-allowed group-[.cb-dark]:text-white group-[.cb-light]:text-black"
+                      <textarea aria-label="chat input" required="" maxLength="4000" rows="1"
+                      tabIndex="0" className="mr-3 max-h-36 w-full resize-none bg-transparent pr-3 leading-[24px] focus:outline-none focus:ring-0 focus-visible:ring-0 cursor-not-allowed group-[.cb-dark]:text-white group-[.cb-light]:text-black"
                       disabled="" placeholder="Message..." style={{height: '24px'}}>
                       </textarea>
                     </div>

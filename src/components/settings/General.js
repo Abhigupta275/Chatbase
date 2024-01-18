@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 function General() {
+
+
+  const [storedData, setStoredData] = useState(null);
+  useEffect(()=>{
+    const dataString = localStorage.getItem("modalData");
+    if (dataString) {
+      const storedData = JSON.parse(dataString);
+      setStoredData(storedData.chatBotSettings);
+      // console.log("Stored Data from localStorage:", storedData.chatBotSettings);
+    }
+
+  },[])
+
   return (
     <div>
       <Sidebar>
@@ -18,7 +31,7 @@ function General() {
                   Chatbot ID
                 </label>
                 <div className="mt-1 flex items-center space-x-4">
-                  <div className="font-semibold">XtmAh0NHl8LZEzu3GEhN9</div>
+                  <div className="font-semibold">{storedData && storedData.chatbotId}</div>
                   <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 px-2 py-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

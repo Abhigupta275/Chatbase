@@ -27,9 +27,9 @@ export default function SignUp() {
   const handleSubmit = async(e) =>{
     e.preventDefault()
     try{
-      const response = await axios.post('http://localhost:8000/auth/signup',data)
+      const response = await axios.post('https://jellyfish-app-5tivv.ondigitalocean.app/auth/signup',data)
       console.log('response', response);
-      if(response.status == 201){
+      if(response.status === 201){
         navigate('/login')
       }
     }catch(err){
@@ -141,7 +141,7 @@ export default function SignUp() {
   
             <p className="mt-10 text-center text-sm text-gray-500">
               Already have Account
-              <Link href="login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+              <Link to="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                 Login  
               </Link>
             </p>

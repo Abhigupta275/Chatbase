@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar";
-import Cookies from "js-cookie";
 
 const Sidebar = ({ children, lable }) => {
-  const initialTab =
-    window.location.pathname === "/sources/text"
-      ? "text"
-      : window.location.pathname === "/sources/website"
-      ? "website"
-      : window.location.pathname === "/sources/qa"
-      ? "qa"
-      : window.location.pathname === "/sources/notion"
-      ? "notion"
-      : "files";
+  const { id } = useParams();
+
+  const initialTab = window.location.pathname.includes("/sources/text")
+    ? "text"
+    : window.location.pathname.includes("/sources/website")
+    ? "website"
+    : window.location.pathname.includes("/sources/qa")
+    ? "qa"
+    : window.location.pathname.includes("/sources/notion")
+    ? "notion"
+    : "files";
 
   const [selectedTab, setSelectedTab] = useState(initialTab);
 
@@ -30,7 +30,7 @@ const Sidebar = ({ children, lable }) => {
       console.log("requestData...", requestData);
 
       const response = await axios.post(
-        "http://localhost:8000/chatbots/",
+        "https://jellyfish-app-5tivv.ondigitalocean.app/chatbots/",
         requestData,
         { withCredentials: true }
       );
@@ -68,7 +68,7 @@ const Sidebar = ({ children, lable }) => {
               <ul role="list" className="flex flex-1 flex-col">
                 <li>
                   <ul role="list" className="space-y-1">
-                    <Link to="/sources/files">
+                    <Link to={`/chatbot/${id}/sources/files`}>
                       <li>
                         <button
                           onClick={() => setSelectedTab("files")}
@@ -96,7 +96,7 @@ const Sidebar = ({ children, lable }) => {
                         </button>
                       </li>
                     </Link>
-                    <Link to="/sources/text">
+                    <Link to={`/chatbot/${id}/sources/text`}>
                       <li>
                         <button
                           onClick={() => setSelectedTab("text")}
@@ -124,7 +124,7 @@ const Sidebar = ({ children, lable }) => {
                         </button>
                       </li>
                     </Link>
-                    <Link to="/sources/website">
+                    <Link to={`/chatbot/${id}/sources/website`}>
                       <li>
                         <button
                           onClick={() => setSelectedTab("website")}
@@ -152,7 +152,7 @@ const Sidebar = ({ children, lable }) => {
                         </button>
                       </li>
                     </Link>
-                    <Link to="/sources/qa">
+                    <Link to={`/chatbot/${id}/sources/qa`}>
                       <li>
                         <button
                           onClick={() => setSelectedTab("qa")}
@@ -180,7 +180,7 @@ const Sidebar = ({ children, lable }) => {
                         </button>
                       </li>
                     </Link>
-                    <Link to="/sources/notion">
+                    <Link to={`/chatbot/${id}/sources/notion`}>
                       <li>
                         <button
                           onClick={() => setSelectedTab("notion")}

@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function Sidebar({ children }) {
-  const initialTab =
-    window.location.pathname === "/general"
-      ? "general"
-      : window.location.pathname === "/settings/model"
-      ? "model"
-      : window.location.pathname === "/settings/chatinterface"
-      ? "chatinterface"
-      : window.location.pathname === "/settings/leads"
-      ? "leads"
-      : "general";
+  const { id } = useParams();
+
+  const initialTab = window.location.pathname.includes("/settings/general")
+    ? "general"
+    : window.location.pathname.includes("/settings/model")
+    ? "model"
+    : window.location.pathname.includes("/settings/chatinterface")
+    ? "chatinterface"
+    : window.location.pathname.includes("/settings/leads")
+    ? "leads"
+    : window.location.pathname.includes("/settings/security")
+    ? "security"
+    : "general";
   const [selectedTab, setSelectedTab] = useState(initialTab);
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://jellyfish-app-5tivv.ondigitalocean.app/chatbots/"
+        );
+        console.log("new res...", response.data[0].status);
+        setData(response.data[0]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -66,7 +87,7 @@ function Sidebar({ children }) {
                     <ul role="list" className="flex flex-1 flex-col">
                       <li>
                         <ul role="list" className="space-y-1">
-                          <Link to="/settings">
+                          <Link to={`/chatbot/${id}/settings/general`}>
                             <li>
                               <button
                                 onClick={() => setSelectedTab("general")}
@@ -99,7 +120,7 @@ function Sidebar({ children }) {
                               </button>
                             </li>
                           </Link>
-                          <Link to="/settings/model">
+                          <Link to={`/chatbot/${id}/settings/model`}>
                             <li>
                               <button
                                 onClick={() => setSelectedTab("model")}
@@ -127,7 +148,7 @@ function Sidebar({ children }) {
                               </button>
                             </li>
                           </Link>
-                          <Link to="/settings/chatinterface">
+                          <Link to={`/chatbot/${id}/settings/chatinterface`}>
                             <li>
                               <button
                                 onClick={() => setSelectedTab("chatinterface")}
@@ -155,7 +176,7 @@ function Sidebar({ children }) {
                               </button>
                             </li>
                           </Link>
-                          <Link to="/settings/leads">
+                          <Link to={`/chatbot/${id}/settings/leads`}>
                             <li>
                               <button
                                 onClick={() => setSelectedTab("leads")}
@@ -180,6 +201,34 @@ function Sidebar({ children }) {
                                   ></path>
                                 </svg>
                                 Leads
+                              </button>
+                            </li>
+                          </Link>
+                          <Link to={`/chatbot/${id}/settings/security`}>
+                            <li>
+                              <button
+                                onClick={() => setSelectedTab("security")}
+                                className={`items-center transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 text-zinc-700 hover:bg-zinc-50 hover:text-violet-600 group flex w-full place-items-start justify-start gap-x-3 whitespace-nowrap rounded-md p-2 text-sm font-semibold leading-6 ${
+                                  selectedTab === "security" &&
+                                  "text-violet-600 bg-zinc-200 hover:bg-zinc-200"
+                                }`}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="1.5"
+                                  stroke="currentColor"
+                                  aria-hidden="true"
+                                  className="text-zinc-400 group-hover:text-violet-600 h-6 w-6 shrink-0"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z"
+                                  ></path>
+                                </svg>
+                                Security
                               </button>
                             </li>
                           </Link>

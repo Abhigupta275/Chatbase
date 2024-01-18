@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Sidebar from "./Sidebar";
+import axios from "axios";
 
 function Model() {
   const [instructions, setInstructions] = useState("");
   const [selectedModel, setSelectedModel] = useState("gpt-3.5-turbo");
+  const [storedData, setStoredData] = useState(null);
+
+  useEffect(()=>{
+    const dataString = localStorage.getItem("modalData");
+    if (dataString) {
+      const storedData = JSON.parse(dataString);
+      setStoredData(storedData);
+      setInstructions(storedData && storedData.chatBotSettings && storedData.chatBotSettings.instructions);
+      // console.log("Stored Data from localStorage:", storedData);
+    }
+  },[])
 
   function handleInstructionsChange(event) {
     setInstructions(event.target.value);
@@ -14,18 +26,21 @@ function Model() {
   }
 
   async function handleSave() {
-    console.log('data....',instructions,selectedModel)
-    // try {
-    //   const response = await axios.post("your-api-endpoint", {
-    //     instructions,
-    //     selectedModel,
-    //   });
-
-    //   console.log("API Response:", response.data);
-    // } catch (error) {
-    //   console.error("API Error:", error);
-    // }
+    // console.log('data....', instructions);
+    try {
+      const response = await axios.put(
+        "https://jellyfish-app-5tivv.ondigitalocean.app/settings/65a8c631eae71bb73a4a19c8/model",
+        { instructions, model:selectedModel }
+      );
+  
+      console.log("API Response:", response.data);
+      // Assuming the response contains the updated data, update the storedData state
+      setStoredData(response.data);
+    } catch (error) {
+      console.error("API Error:", error);
+    }
   }
+  
 
   return (
     <div>
@@ -35,7 +50,7 @@ function Model() {
             <div className="border-b border-zinc-200 bg-white px-5 py-4">
               <h3 className="text-xl font-semibold leading-6 text-zinc-900 ">
                 Training
-              </h3>
+              </h3> 
             </div>
             <div className="p-5">
               <div className="pb-8">
@@ -43,7 +58,7 @@ function Model() {
                   Last trained at
                 </label>
                 <div className="mt-1 font-semibold">
-                  January 11, 2024 at 10:59 AM
+                  {storedData && storedData.newChatbot && storedData.newChatbot.timeStamp}
                 </div>
               </div>
             </div>
@@ -77,15 +92,12 @@ function Model() {
                     name="intructions"
                     rows="5"
                     className="w-full min-w-0  flex-auto appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3 text-zinc-900 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm"
-                    maxlength="6000"
+                    maxLength="6000"
                     value={instructions}
                     onChange={handleInstructionsChange}
+                    
                   >
-                    I want you to act as a support agent. Your name is "AI
-                    Assistant". You will provide me with answers from the given
-                    info. If the answer is not included, say exactly "Hmm, I am
-                    not sure." and stop after that. Refuse to answer any
-                    question not about the info. Never break character.
+                    
                   </textarea>
                 </div>
                 <p className="mt-2 text-sm text-zinc-500">
@@ -121,8 +133,8 @@ function Model() {
             </div>
             <div className="flex justify-end bg-zinc-100 px-5 py-3">
               <button
-                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-7 rounded-md px-3"
-                disabled={instructions.trim() === ''}
+                className="inline-flex items-center cursor-pointer justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 bg-zinc-900 text-zinc-50 shadow hover:bg-zinc-800/90 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-50/90 h-7 rounded-md px-3"
+                // disabled={instructions.trim() === ''}
                 onClick={handleSave}
               >
                 Save

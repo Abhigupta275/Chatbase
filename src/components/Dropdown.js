@@ -7,13 +7,13 @@ const Dropdown = () => {
   const [selected, setSelected] = useState("");
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    fetch("https://restcountries.com/v2/all?fields=name")
-      .then((res) => res.json())
-      .then((data) => {
-        setCountries(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://restcountries.com/v2/all?fields=name")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setCountries(data);
+  //     });
+  // }, []);
   return (
     <div className="w-full font-medium h-9">
       <div
