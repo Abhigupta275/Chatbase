@@ -17,7 +17,6 @@ function Sidebar() {
       setStoredData(storedData.newChatbot);
       // console.log("Stored Data from localStorage:", storedData);
     }
-
   },[])
 
 
