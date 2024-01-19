@@ -1,6 +1,17 @@
 import React from "react";
+import { useContext } from "react";
+import { QaContext } from "../../context/Qa";
 
 const DynamicSection = ({ index, onDelete, questions,handleChangeQue,handleChangeAns ,answers }) => {
+  const {setQuestion,setAnswer} = useContext(QaContext)
+
+
+  const handleContextChange = () =>{
+    setQuestion(questions)
+    setAnswer(answers)
+  }
+
+
   return (
     <div className="my-8 rounded border p-2 shadow">
       <div className="my-8 rounded border p-2 shadow">
@@ -34,7 +45,10 @@ const DynamicSection = ({ index, onDelete, questions,handleChangeQue,handleChang
             value={questions}
             className="w-full min-w-0   appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3  text-zinc-900 shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm"
             rows="3"
-            onChange={(e) => handleChangeQue(e, index)}
+            onChange={(e) => {
+              handleChangeQue(e, index);
+              handleContextChange();
+            }}
           >
             {questions}
           </textarea>
@@ -45,7 +59,10 @@ const DynamicSection = ({ index, onDelete, questions,handleChangeQue,handleChang
           value={answers}
             className="w-full min-w-0   appearance-none rounded-md border border-zinc-900/10 bg-white p-1 px-3  text-zinc-900 shadow-md shadow-zinc-800/5 placeholder:text-zinc-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 sm:text-sm"
             rows="8"
-            onChange={(e) => handleChangeAns(e, index)}
+            onChange={(e) => {
+              handleChangeAns(e, index);
+              handleContextChange(); 
+            }}
           >{answers}</textarea>
         </div>
       </div>

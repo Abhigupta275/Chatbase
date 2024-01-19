@@ -1,7 +1,28 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
+import axios from "axios";
+import { useParams } from "react-router-dom/dist";
 
 function General() {
+
+  const [data, setData] = useState(null);
+  const { id } = useParams();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://jellyfish-app-5tivv.ondigitalocean.app/chatbots/${id}`, {
+          withCredentials: true,
+        });
+        console.log("new res...", response.data);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [id]);
 
 
   const [storedData, setStoredData] = useState(null);
@@ -31,7 +52,7 @@ function General() {
                   Chatbot ID
                 </label>
                 <div className="mt-1 flex items-center space-x-4">
-                  <div className="font-semibold">{storedData && storedData.chatbotId}</div>
+                  {/* <div className="font-semibold">{(data && data.data._id) || (storedData && storedData.storedData._id)}</div> */}
                   <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-80 border border-zinc-200 bg-transparent shadow-sm hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-50 h-9 px-2 py-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +79,7 @@ function General() {
                 <div className="mt-1 font-semibold">1,071</div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-700">
+                <label className="block text-sm font-medium text-zinc-  700">
                   Name
                 </label>
                 <div className="mt-1">

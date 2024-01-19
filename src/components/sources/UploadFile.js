@@ -1,37 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Dropzone from "react-dropzone";
+import { FilesContext } from "../../context/Files";
 
 const UploadFile = () => {
-  const [file, setFile] = useState(null);
+
+  const FilesState = useContext(FilesContext);
 
   const handleUpload = (acceptedFiles) => {
-    console.log("logging drop/selected file", acceptedFiles);
-    // fake request to upload file
-    const url = "https://api.escuelajs.co/api/v1/files/upload";
-    const formData = new FormData();
-    formData.append("file", acceptedFiles[0]); 
+    console.log("logging drop/selected files", acceptedFiles);
 
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          setFile(acceptedFiles[0]);
-        } else {
-          console.error(response);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const formData = new FormData();
+
+    acceptedFiles.forEach((file, index) => {
+      formData.append(`file${index + 1}`, file);
+    });
+
+    
+    FilesState.setFiles(acceptedFiles);
+
+    console.log("FormData:", formData);
   };
 
   return (
     <div className="main-container">
       <Dropzone
         onDrop={handleUpload}
-        accept={['image/*']}
+        accept={["image/*"]}
         minSize={1024}
         maxSize={3072000}
       >
@@ -96,15 +90,13 @@ const UploadFile = () => {
         <div className="border-b my-5 mx-auto w-1/4"></div>
       </div>
 
-      {file && (
+      {FilesState.files && (
         <>
-          {/* <h4>File Uploaded Successfully !!</h4> */}
-          <h4 className="pl-5 pb-10">{file.name}</h4>
-          {/* <img
-            src={URL.createObjectURL(file)}
-            className="img-container"
-            alt="Uploaded file"
-          /> */}
+          {FilesState.files.map((file, index) => (
+            <div key={index}>
+              <h4 className="pl-5 pb-10">{file.name}</h4>
+            </div>
+          ))}
         </>
       )}
     </div>

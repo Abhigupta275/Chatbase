@@ -26,7 +26,7 @@ function Sidebar() {
         const response = await axios.get(`https://jellyfish-app-5tivv.ondigitalocean.app/chatbots/${id}`, {
           withCredentials: true,
         });
-        // console.log("new res...", response.data);
+        console.log("new res...", response.data);
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -34,10 +34,6 @@ function Sidebar() {
     };
     fetchData();
   }, [id]);
-
-  // if (!data) {
-  //   return null;
-  // }
 
   return (
     <div>
@@ -164,7 +160,7 @@ function Sidebar() {
                         Last trained at
                       </label>
                       <div className="text-sm font-semibold text-zinc-700">
-                      {(data && data.last_trained_at) || (storedData && storedData.timeStamp)}
+                      {(data && data.timeStamp) || (storedData && storedData.timeStamp)}
                       </div>
                     </div>
                   </div>

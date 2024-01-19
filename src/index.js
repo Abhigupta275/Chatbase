@@ -1,13 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { TextProvider } from "./context/Text";
+import { FilesProvider } from "./context/Files";
+import { QaProvider } from "./context/Qa";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <TextProvider>
+      <FilesProvider>
+        <QaProvider>
+        <App />
+        </QaProvider>
+      </FilesProvider>
+    </TextProvider>
   </React.StrictMode>
 );
 

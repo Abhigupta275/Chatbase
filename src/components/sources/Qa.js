@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
+import { useContext } from "react";
 import DynamicSection from "./DynamicSection";
+import { QaContext } from "../../context/Qa";
 
 function Qa() {
-  const [sections, setSections] = useState([]);
+  const { sections, setSections } = useContext(QaContext);
 
   const addNewInput = () => {
     setSections([...sections, { question: "", answer: "" }]);
