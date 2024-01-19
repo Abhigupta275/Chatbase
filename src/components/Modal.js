@@ -31,9 +31,11 @@ const Modal = ({ isOpen, onClose }) => {
       );
       if (response.status === 201) {
         onClose();
-        navigate("/");
+        
+        const chatbotId = response.data.chatBotSettings.chatbotId;
+        navigate(`/chatbot/${chatbotId}`);
       }
-      console.log("here response modal...", response.data);
+      // console.log("here response modal...", response.data);
       setModalData(response.data)
       const responseDataString = JSON.stringify(response.data);
       localStorage.setItem('modalData',responseDataString)

@@ -30,7 +30,7 @@ export default function Login() {
         }
       );
       console.log("response", response.data.token);
-      // localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.token);
       if (response.status == 200 || response.status == 201) {
         navigate("/chatbotcreate");
       }

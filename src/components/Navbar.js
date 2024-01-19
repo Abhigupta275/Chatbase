@@ -25,19 +25,21 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleLogout = async () =>{
-    try {
-      const response = await axios.delete(
-        "https://jellyfish-app-5tivv.ondigitalocean.app/users/logout",
-        {
-          withCredentials: true,
-        }
-      );
-      if(response.status === 200){
-        navigate('/login')
-      }
-    } catch (err) {
-      console.log("error", err);
-    }
+    // try {
+    //   const response = await axios.delete(
+    //     "https://jellyfish-app-5tivv.ondigitalocean.app/users/logout",
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   );
+    //   if(response.status === 200){
+    //     navigate('/login')
+    //   }
+    // } catch (err) {
+    //   console.log("error", err);
+    // }
+    localStorage.clear();
+    navigate('/login')
   }
 
   return (
