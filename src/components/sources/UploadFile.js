@@ -3,22 +3,27 @@ import Dropzone from "react-dropzone";
 import { FilesContext } from "../../context/Files";
 
 const UploadFile = () => {
-
   const FilesState = useContext(FilesContext);
 
   const handleUpload = (acceptedFiles) => {
     console.log("logging drop/selected files", acceptedFiles);
-
+  
     const formData = new FormData();
-
+  
     acceptedFiles.forEach((file, index) => {
-      formData.append(`file${index + 1}`, file);
+      formData.append(`file`, file);
     });
-
-    
-    FilesState.setFiles(acceptedFiles);
-
+  
     console.log("FormData:", formData);
+  
+    FilesState.setFiles(acceptedFiles);
+  };
+  
+
+  const handleDelete = (index) => {
+    const updatedFiles = [...FilesState.files];
+    updatedFiles.splice(index, 1);
+    FilesState.setFiles(updatedFiles);
   };
 
   return (
@@ -50,7 +55,7 @@ const UploadFile = () => {
             >
               <input {...getInputProps()} />
               <div className="p-5">
-                <div className=" flex flex-row justify-center items-center w-full p-4 border border-gray-300 h-48">
+                <div className="flex flex-row justify-center items-center w-full p-4 border border-gray-300 h-48">
                   <div className="flex flex-col gap-1">
                     <div className="flex items-center justify-center text-gray-500">
                       <svg
@@ -93,8 +98,14 @@ const UploadFile = () => {
       {FilesState.files && (
         <>
           {FilesState.files.map((file, index) => (
-            <div key={index}>
-              <h4 className="pl-5 pb-10">{file.name}</h4>
+            <div key={index} className="flex items-start">
+              <button
+                className="text-white mr-2 bg-black p-2 rounded rounded-full"
+                onClick={() => handleDelete(index)}
+              >
+                Delete
+              </button>
+              <h4 className="pl-5 pb-10 ">{file.name}</h4>
             </div>
           ))}
         </>

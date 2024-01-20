@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar";
+import { useContext } from "react";
+import { QaContext } from "../../context/Qa";
+import { FilesContext } from "../../context/Files";
+import { TextContext } from "../../context/Text";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Sidebar = ({ children, lable }) => {
   const { id } = useParams();
+  const { question, answer } = useContext(QaContext);
+  const { text } = useContext(TextContext);
+  const { files } = useContext(FilesContext);
 
   const initialTab = window.location.pathname.includes("/sources/text")
     ? "text"
@@ -20,30 +29,84 @@ const Sidebar = ({ children, lable }) => {
 
   const handleCreateChatbot = async () => {
     try {
-      const requestData = {
-        chatbot_name: "xyz.docx",
-        settingId: "2",
-        generatedID: "abcd1234",
-        number_of_characters: "109",
-        last_trained_at: "Jandk",
+      // QA Data
+      const QaData = {
+        userId: id,
+        vectorStore: "file_vector",
+        wordCount: 150,
+        tokenCount: 300,
+        questionAnswers: [
+          {
+            question: question,
+            answer: answer,
+          },
+        ],
       };
-      console.log("requestData...", requestData);
-
-      const response = await axios.post(
-        "https://jellyfish-app-5tivv.ondigitalocean.app/chatbots/",
-        requestData,
+      const qaResponse = await axios.post(
+        `https://jellyfish-app-5tivv.ondigitalocean.app/resources/qa-sources/${id}`,
+        QaData,
         { withCredentials: true }
       );
-      console.log("data...", response);
+      console.log("QA data...", qaResponse);
 
-      if (!response.data) {
-        throw new Error("Failed to create chatbot");
+      if (!qaResponse.data) {
+        throw new Error("Failed to create QA chatbot");
       }
 
-      // localStorage.setItem("chatbotResponse", JSON.stringify(response.data));
+      // Text Data
+      const textData = {
+        userId: id,
+        originalText: text,
+        vectorStore: "text_vector",
+        wordCount: 80,
+        tokenCount: 160,
+      };
 
-      // You can also redirect to another page or perform other actions as needed
+      const textResponse = await axios.post(
+        `https://jellyfish-app-5tivv.ondigitalocean.app/resources/text-sources/${id}`,
+        textData,
+        { withCredentials: true }
+      );
+      console.log("Text data...", textResponse);
+
+      if (!textResponse.data) {
+        throw new Error("Failed to create text chatbot");
+      }
+
+      // File Data
+      const formData = new FormData();
+      files.forEach((file, index) => {
+        formData.append("file", file);
+      });
+      formData.append("userId", id);
+      formData.append("vectorStore", "file_vector");
+      formData.append("wordCount", 80);
+      formData.append("tokenCount", 160);
+
+      const fileResponse = await axios.post(
+        `https://jellyfish-app-5tivv.ondigitalocean.app/resources/file-sources/${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log("File data...", fileResponse);
+
+      // Display success notification
+      toast.success("Chatbot created successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
     } catch (error) {
+      toast.error(`Error creating chatbot: ${error.message}`, {
+        position: "top-right",
+        autoClose: 3000, 
+        hideProgressBar: false,
+      });
       console.error("Error creating chatbot:", error);
     }
   };
@@ -229,6 +292,7 @@ const Sidebar = ({ children, lable }) => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };
